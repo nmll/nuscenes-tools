@@ -64,6 +64,7 @@ class DetectionEval:
         self.verbose = verbose
         self.cfg = config
 
+        print(result_path)
         # Check result file exists.
         assert os.path.exists(result_path), 'Error: The result file does not exist!'
 

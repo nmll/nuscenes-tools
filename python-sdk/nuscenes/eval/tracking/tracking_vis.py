@@ -35,22 +35,23 @@ from nuscenes.eval.tracking.mot import MOTAccumulatorCustom
 from nuscenes.utils.data_classes import LidarPointCloud#读取点云
 
 
-save_path = "./visresult/pp_bbox_default/"      #保存路径及名称
-datset_path = "/share/nuscenes/v1.0-trainval/"  #数据集路径
-#result_file = "/share/OpenPCDet/output/cfgs/nuscenes_models/cbgs_second_multihead/sec_neiborcbam_reid/eval/epoch_20/val/default/\
+save_path = "./visresult/pp_neibcbamrthr1_glbbox"      #保存路径及名称
+datset_path = "/share/nuscenes/v1.0-trainval/"         #数据集路径
+result_file = "/share/OpenPCDet/output/cfgs/nuscenes_models/cbgs_pp_multihead/pp_neibcbamrthr1_glbbox/eval/epoch_20/val/default/final_result/data/trk_results/trk_results_nusc.json"
 #final_result/data/trk_results/trk_results_nusc.json"
 
-result_file = "/share/OpenPCDet/output/cfgs/nuscenes_models/cbgs_pp_multihead/default/eval/epoch_5823/val/default/\
-final_result/data/trk_results/trk_results_nusc.json"  #结果文件
+#result_file = "/share/OpenPCDet/output/cfgs/nuscenes_models/cbgs_second_multihead/sec_neiborcbamreid3_marepre/eval/epoch_20/val/default/final_result/data/trk_results/trk_results_nusc.json"  #结果文件
+#result_file = "/share/nuscenes/OpenPCDet/output/cfgs/nuscenes_models/pointrcnn_2/default/eval/eval_with_train/epoch_20/val/final_result/data/results_nusc.json"  #结果文件
 #result_file = "/share/OpenPCDet/output/cfgs/nuscenes_models/cbgs_second_multihead/default/eval/epoch_6229/val/default/final_result/data/\
 #trk_results/trk_results_nusc.json"
 #info_path = datset_path + "/nuscenes_infos_10sweeps_val.pkl"
 render_classes = ["car"]      #所需要画的种类
 frame_id_thr = 30 #no use   
-ifplotgt = False            
-scene_id_thr = 150         #共150个场景，每个场景越40帧 仅画前 scene_id_thr 个场景
+ifplotgt = True            
+scene_id_thr = 150         #共150个场景，每个场景约40帧 仅画前 scene_id_thr 个场景
 lidar_name = 'LIDAR_TOP'
 cam_name = 'CAM_FRONT'
+
 
 
 class TrackingEval:
@@ -314,7 +315,7 @@ class TrackingEval:
                             filename_lid_full = sd_record_lid['filename']
                             src_lid_path = os.path.join(datset_path, filename_lid_full)
                             points = LidarPointCloud.from_file(src_lid_path)
-
+                         
 
                             #if lidar_token == "5af9c7f124d84e7e9ac729fafa40ea01" or lidar_token == "16be583c31a2403caa6c158bb55ae616":#选择特定帧 上面要设成150个场景
                             renderer.render(events, timestamp, frame_gt, frame_pred, points, pose_record, cs_record, ifplotgt)

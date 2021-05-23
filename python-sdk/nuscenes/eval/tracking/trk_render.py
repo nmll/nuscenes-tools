@@ -136,9 +136,11 @@ class TrackingRenderer:
         switches = events[events.Type == 'SWITCH']
         switch_ids = switches.HId.values
         fig, ax = plt.subplots()
-        
-        #points.render_height(ax,view=np.eye(4), x_lim=(-50,50), y_lim=(-50,50),  marker_size=0.1)#BEV
-        points.render_height(ax, view=np.eye(4) )#BEV
+        #plt.style.use('dark_background')         #  黑  背景颜色
+        plt.style.use('classic')                  #  白  背景颜色
+
+        points.render_height(ax,view=np.eye(4), x_lim=(-50,50), y_lim=(-50,50),  marker_size=0.1)#BEV
+        #points.render_height(ax, view=np.eye(4) )#BEV
         #points = points.rotate(Quaternion( pose_record["rotation"]).inverse)
 
         #points.render_intensity(ax)
@@ -187,8 +189,8 @@ class TrackingRenderer:
 
         # Plot ego pose.
         plt.scatter(0, 0, s=96, facecolors='none', edgecolors='k', marker='o')
-        #plt.xlim(-50, 50)
-        #plt.ylim(-50, 50)
+        plt.xlim(-50, 50)
+        plt.ylim(-50, 50)
         plt.axis('off')
         # Save to disk and close figure.
         fig.savefig(os.path.join(self.save_path, '{}.png'.format(timestamp)))
